@@ -16,4 +16,6 @@ Used tools:
 
 MySQL
 
-CSV files
+Author : Falguni Mehta
+
+this project is part of my portfolio ,showing the SQL skills essential for data analyst roles.
