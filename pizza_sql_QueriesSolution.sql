@@ -1,7 +1,7 @@
 create database pizza;
 use pizza;
 select * from pizzas;
-select * from pizzatypes;
+select * from pizza_types;
 select * from orders;
 select * from order_details;
 
@@ -14,7 +14,7 @@ from order_details od join pizzas p
 on od.pizza_id = p.pizza_id;
 
 -- task3 Identify the highest-priced pizza.
-select pt.name,p.price from pizzatypes pt join pizzas p
+select pt.name,p.price from pizza_types pt join pizzas p
 on pt.pizza_type_id=p.pizza_id
 group by pt.name,p.price
 order by p.price desc 
@@ -35,7 +35,7 @@ order by 2 desc
 limit 5;
 
 -- task6 Join the necessary tables to find the total quantity of each pizza category ordered.
-select pt.category,count(od.quantity) from pizzatypes pt join pizzas p
+select pt.category,count(od.quantity) from pizza_types pt join pizzas p
 on pt.pizza_type_id=p.pizza_type_id
 join order_details od
 on p.pizza_id= od.pizza_id
@@ -46,7 +46,7 @@ select hour(time),count(order_id) from orders
 group by 1;
 
 -- task8 Join relevant tables to find the category-wise distribution of pizzas.
-select category,count(name) from pizzatypes
+select category,count(name) from pizza_types
 group by 1;
 
 -- task9 Group the orders by date and calculate the average number of pizzas ordered per day.
@@ -72,7 +72,7 @@ limit 3;
 select pt.category, sum(p.price*od.quantity)/(select (sum(p.price*od.quantity)) 
 from pizzas p join order_details od
 on p.pizza_id=od.pizza_id)*100
-from pizzatypes pt join pizzas p 
+from pizza_types pt join pizzas p 
 on pt.pizza_type_id=p.pizza_type_id
 join order_details od
 on p.pizza_id = od.pizza_id
@@ -80,7 +80,7 @@ group by 1;
 
 -- task12 Determine the top 3 most ordered pizza types based on revenue for each pizza category.
 select pt.category,pt.pizza_type_id,pt.name, sum(p.price*od.quantity)
-from pizzatypes pt join pizzas p 
+from pizza_types pt join pizzas p 
 on pt.pizza_type_id=p.pizza_type_id
 join order_details od
 on p.pizza_id = od.pizza_id
